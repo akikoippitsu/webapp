@@ -1,2 +1,12 @@
 <h1>Tacos page</h1>
 <p>Hello from Rails!</p>
+
+<%
+tacos = ["carnitas", "Al Pastor", "Avocado"]
+%>
+
+<ul>
+  <% tacos.each do |taco| %>
+    <li><%= taco %></li>
+  <% end %>
+</ul>
