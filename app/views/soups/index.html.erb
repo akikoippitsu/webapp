@@ -1,0 +1,461 @@
+<%# Soup Product Development Page - US Market %>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #f9f8f5; color: #1a1a1a; }
+
+  .hero {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 60px 40px;
+    text-align: center;
+  }
+  .hero .eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: 3em;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .hero .sub {
+    font-size: 13px;
+    color: #888;
+    letter-spacing: 2px;
+  }
+  .hero .meta {
+    margin-top: 24px;
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 1px;
+  }
+
+  .section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  /* Product Cards */
+  .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2px; margin-bottom: 2px; }
+
+  .product-card {
+    background: #fff;
+    padding: 40px 32px;
+    position: relative;
+  }
+  .product-card .tag {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 4px 10px;
+    margin-bottom: 20px;
+  }
+  .product-card .tag.green { background: #3a6b35; }
+  .product-card .tag.amber { background: #8b5e00; }
+  .product-card .tag.red { background: #8b2500; }
+
+  .product-card h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .product-card .ingredients {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #999;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .product-card .concept {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 24px;
+  }
+
+  .badges {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .badge {
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    padding: 10px 16px;
+    min-width: 80px;
+  }
+  .badge .val { font-size: 1.4em; font-weight: 700; }
+  .badge .lbl { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-top: 2px; }
+
+  .discussion {
+    background: #f9f8f5;
+    padding: 16px 20px;
+    border-left: 3px solid #1a1a1a;
+  }
+  .discussion .disc-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 8px;
+  }
+  .discussion ul { padding-left: 16px; }
+  .discussion li { font-size: 13px; color: #555; line-height: 1.9; }
+
+  /* Ideas Section */
+  .ideas { background: #fff; }
+  .ideas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+  .idea-card {
+    border: 1px solid #e8e8e8;
+    padding: 28px 24px;
+  }
+  .idea-card .idea-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .idea-card p { font-size: 13px; color: #666; line-height: 1.7; }
+  .idea-card .note {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #e07000;
+    background: #fff8ee;
+    padding: 3px 8px;
+  }
+
+  /* Persona */
+  .persona-section { background: #1a1a1a; color: #fff; }
+  .persona-section .section-label { color: #555; border-color: #333; }
+  .persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  @media (max-width: 600px) { .persona-grid { grid-template-columns: 1fr; } }
+
+  .persona-block h3 {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 14px;
+  }
+  .persona-block p, .persona-block li {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #ccc;
+  }
+  .persona-block ul { padding-left: 0; list-style: none; }
+  .persona-block ul li::before { content: "— "; color: #555; }
+
+  .persona-stat {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .persona-stat span {
+    font-size: 11px;
+    letter-spacing: 1px;
+    border: 1px solid #333;
+    padding: 4px 10px;
+    color: #aaa;
+  }
+
+  /* Keywords */
+  .keywords-section { background: #f0ede6; }
+  .kw-list { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+  .kw {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid #1a1a1a;
+    padding: 8px 16px;
+  }
+  .use-cases { display: flex; gap: 12px; flex-wrap: wrap; }
+  .use-case {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 8px 16px;
+  }
+
+  /* Next Steps */
+  .steps-section { background: #fff; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  @media (max-width: 600px) { .steps { grid-template-columns: 1fr; } }
+  .step {
+    background: #f9f8f5;
+    padding: 32px 28px;
+    position: relative;
+  }
+  .step .step-date {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #999;
+    margin-bottom: 10px;
+  }
+  .step p { font-size: 14px; line-height: 1.7; color: #444; }
+
+  /* Source attribution */
+  .source { font-size: 10px; color: #bbb; margin-top: 12px; }
+
+  .jtbd {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 48px 40px;
+    text-align: center;
+  }
+  .jtbd .jtbd-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 16px;
+  }
+  .jtbd blockquote {
+    font-size: 1.4em;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #f0ede6;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+</style>
+
+<div class="hero">
+  <div class="eyebrow">Product Development · US Market</div>
+  <h1>Soup Recipes</h1>
+  <div class="sub">Source: Whole Foods</div>
+  <div class="meta">April 26, 2026 &nbsp;·&nbsp; Akiko Ippitsu, Yuka Inomata</div>
+</div>
+
+<!-- Products -->
+<div class="section">
+  <div class="section-label">Product Lineup</div>
+  <div class="products">
+
+    <div class="product-card">
+      <div class="tag green">Featured</div>
+      <h2>Creamy Edamame Soup</h2>
+      <div class="ingredients">Edamame · Soy Milk</div>
+      <div class="badges">
+        <div class="badge">
+          <div class="val">10g</div>
+          <div class="lbl">Protein</div>
+        </div>
+        <div class="badge">
+          <div class="val">5g</div>
+          <div class="lbl">Fiber</div>
+        </div>
+      </div>
+      <p class="concept">
+        日本の厳選した枝豆を使用。素材本来の風味となめらかな口当たりを活かしたクリーミースープ。ごろごろした枝豆で食べ応えもあり。植物由来のたんぱく質と食物繊維をバランスよく含み、身体にやさしく、エネルギーをチャージ。
+      </p>
+      <div class="discussion">
+        <div class="disc-label">Discussion Points</div>
+        <ul>
+          <li>粒枝豆をスープに加えることの可否</li>
+          <li>たんぱく質・食物繊維の量</li>
+          <li>Carb (Pasta, Oats, Rice) オプション</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="tag amber">Featured</div>
+      <h2>French Onion Soup</h2>
+      <div class="ingredients">Onion · Cheese · Bread · Black Pepper</div>
+      <div class="badges">
+        <div class="badge">
+          <div class="val">10g</div>
+          <div class="lbl">Protein</div>
+        </div>
+        <div class="badge">
+          <div class="val">5g</div>
+          <div class="lbl">Fiber</div>
+        </div>
+      </div>
+      <p class="concept">
+        アメリカのレストランで人気のスープ。北海道玉ねぎ使用。飴色になるまで丁寧に炒めた玉ねぎの深い甘みと旨みを引き出したフレンチオニオンスープ。植物由来のたんぱく質と食物繊維を含み、コクがありながらも重すぎず、日常に取り入れやすい一杯。
+      </p>
+      <div class="discussion">
+        <div class="disc-label">Discussion Points</div>
+        <ul>
+          <li>チーズ・パンの利用可否および代替食材</li>
+          <li>たんぱく質・食物繊維の量</li>
+          <li>その他アピーリングポイント（TBD）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="tag red">Featured</div>
+      <h2>Spicy Miso Butter Ramen</h2>
+      <div class="ingredients">Corn · Edamame · Tofu · Ramen · Miso</div>
+      <div class="badges">
+        <div class="badge">
+          <div class="val">—</div>
+          <div class="lbl">TBD</div>
+        </div>
+      </div>
+      <p class="concept">
+        北海道味噌バターラーメン。米国でも大人気のラーメン。風味は少し辛い味噌バター風味。ビーガン食材で健康的に。食べ応えを出すためコーン・枝豆・豆腐をプラス。
+      </p>
+      <div class="discussion">
+        <div class="disc-label">Discussion Points</div>
+        <ul>
+          <li>動物性の出汁なしでうまみが出るか</li>
+          <li>麺を含んだ製品の製造可否</li>
+          <li>クリーミー坦々など他フレーバーも検討可</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Ideas -->
+<div class="ideas">
+  <div class="section">
+    <div class="section-label">Additional Ideas</div>
+    <div class="ideas-grid">
+
+      <div class="idea-card">
+        <div class="idea-name">Sweet Potato</div>
+        <p>米国でも "Japanese Sweet Potato" として販売されており、知名度が上がっています。野菜のごろごろスープやさつまいも単体のスープ等も考えられます。</p>
+        <span class="note">Available at Whole Foods</span>
+      </div>
+
+      <div class="idea-card">
+        <div class="idea-name">Tomato Soup</div>
+        <p>色鮮やかで見栄えが良いが、現地の他スープとのコンセプト差別化が難しい可能性あり。</p>
+        <span class="note">Requires differentiation strategy</span>
+      </div>
+
+      <div class="idea-card">
+        <div class="idea-name">Yuzu</div>
+        <p>米国で抹茶の次に人気な食材はゆず。果物なのでデザートの印象が強く、スープとの相性は要検討。</p>
+        <span class="note">Ref: YUZUCO, Panera Bread</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Jobs to be Done -->
+<div class="jtbd">
+  <div class="jtbd-label">Jobs to be Done</div>
+  <blockquote>"短時間で 'ちゃんと食べた感' と栄養を取りたい"</blockquote>
+</div>
+
+<!-- Persona -->
+<div class="persona-section">
+  <div class="section">
+    <div class="section-label">Who is our Persona?</div>
+    <div class="persona-grid">
+
+      <div>
+        <div class="persona-block" style="margin-bottom:28px;">
+          <h3>Profile</h3>
+          <ul>
+            <li>ウェルネス × パフォーマンス志向のハイキャリア女性</li>
+            <li>年齢：20代後半〜30代</li>
+            <li>職業：コンサル・テック・スタートアップ（高ストレス職）</li>
+            <li>居住：NY・LA・Chicago 等都市</li>
+          </ul>
+        </div>
+        <div class="persona-block">
+          <h3>Lifestyle</h3>
+          <ul>
+            <li>朝：コーヒーまたはプロテインのみ</li>
+            <li>昼：Sweetgreen 系</li>
+            <li>夜：軽く済ませたい・遅い</li>
+            <li>Equinox / CorePower Yoga / Pilates 通い</li>
+            <li>Erewhon / Whole Foods で買い物</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="persona-block" style="margin-bottom:28px;">
+          <h3>Values</h3>
+          <ul>
+            <li>「太らない」「肌にいい」「機能性」が最優先</li>
+            <li>"いかにも健康食品"は嫌 → デザインも重視</li>
+            <li>Processed food は好まない</li>
+            <li>Natural・Organic・素材そのまま</li>
+          </ul>
+        </div>
+        <div class="persona-block">
+          <h3>Pain Points</h3>
+          <ul>
+            <li>忙しくて栄養バランスが崩れている</li>
+            <li>プロテインバーに飽きた</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Keywords -->
+<div class="keywords-section">
+  <div class="section">
+    <div class="section-label">Key Words</div>
+    <div class="kw-list">
+      <% %w[Japanese\ Ingredients High\ Protein Fiber Beauty Functional\ Food Non\ Processed Natural Healthy].each do |kw| %>
+        <span class="kw"><%= kw %></span>
+      <% end %>
+    </div>
+    <div class="section-label" style="margin-top:32px;">Use Occasions</div>
+    <div class="use-cases">
+      <span class="use-case">Breakfast</span>
+      <span class="use-case">Snack</span>
+      <span class="use-case">Light Meal</span>
+    </div>
+  </div>
+</div>
+
+<!-- Next Steps -->
+<div class="steps-section">
+  <div class="section">
+    <div class="section-label">Next Steps</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-date">4/26</div>
+        <p>Follow-up Meeting</p>
+      </div>
+      <div class="step">
+        <div class="step-date">5月</div>
+        <p>商品開発・消費者アンケートご相談</p>
+      </div>
+      <div class="step">
+        <div class="step-date">6月</div>
+        <p>Fancy Food Show（ご予定）</p>
+      </div>
+    </div>
+  </div>
+</div>
